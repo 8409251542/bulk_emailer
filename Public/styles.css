@@ -1,0 +1,10 @@
+/* public/styles.css */
+body { font-family: Inter, system-ui, Arial; background:#f4f6f8; margin:0; color:#222;}
+.container { max-width:900px; margin:24px auto; display:grid; grid-template-columns:1fr; gap:16px; padding:0 16px;}
+.card { background:white; padding:16px; border-radius:10px; box-shadow: 0 6px 20px rgba(20,20,30,0.06);}
+label { display:block; margin-bottom:12px; font-size:14px;}
+input, textarea, select { width:100%; padding:10px; margin-top:6px; border-radius:8px; border:1px solid #e2e8f0; font-size:14px;}
+button { background:#0f172a; color:white; padding:10px 14px; border-radius:8px; border:none; cursor:pointer;}
+.topbar { display:flex; justify-content:space-between; align-items:center; padding:12px 20px; background:#0f172a; color:white;}
+.muted { color:#4b5563; white-space:pre-wrap; margin-top:10px;}
+.card h3 { margin-top:0; }

@@ -1,0 +1,25 @@
+{
+  "name": "demo-backend",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "fs": "^0.0.1-security",
+    "jszip": "^3.10.1",
+    "multer": "^2.0.2",
+    "node-fetch": "^3.3.2",
+    "path": "^0.12.7",
+    "xlsx": "^0.18.5"
+  }
+}

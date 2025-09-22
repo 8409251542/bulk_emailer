@@ -1,0 +1,93 @@
+<!-- public/dashboard.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Send MMS - Dashboard</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <h2>MMS Sender</h2>
+    <button id="logoutBtn">Logout</button>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h3>Recipients</h3>
+      <label>Paste numbers (comma / newline separated)
+        <textarea id="numbers" placeholder="918xxxxxxxx, 917yyyyyyyy"></textarea>
+      </label>
+      <label>Or upload file (.txt, .csv, .xlsx)
+        <input type="file" id="fileNumbers" accept=".txt,.csv,.xlsx" />
+      </label>
+    </section>
+
+    <section class="card">
+      <h3>Message & Attachments</h3>
+      <label>Message
+        <textarea id="message" rows="4">Hello from OnBuka demo</textarea>
+      </label>
+      <label>Title
+        <input id="mmsTitle" value="Title" />
+      </label>
+      <label>mmsType
+        <select id="mmsType">
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+      </label>
+
+      <label>Attachments (will be uploaded first)
+        <input type="file" id="attachments" multiple />
+      </label>
+
+      <label>App ID (optional; default from server .env)
+        <input id="appId" placeholder="4luaKsL2" />
+      </label>
+
+      <button id="sendBtn">Send MMS</button>
+
+      <pre id="result" class="muted"></pre>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('logoutBtn').addEventListener('click', async ()=>{
+      await fetch('http://localhost:3000/api/logout', { method: 'POST' });
+      location.href = '/login.html';
+    });
+
+    document.getElementById('sendBtn').addEventListener('click', async ()=>{
+      const sendBtn = document.getElementById('sendBtn');
+      sendBtn.disabled = true;
+      document.getElementById('result').textContent = 'Sending...';
+
+      const fd = new FormData();
+      const numbersText = document.getElementById('numbers').value.trim();
+      if (numbersText) fd.append('numbers', numbersText);
+
+      const fileEl = document.getElementById('fileNumbers');
+      if (fileEl.files.length) fd.append('fileNumbers', fileEl.files[0]);
+
+      const attachmentsEl = document.getElementById('attachments');
+      for (let i=0;i<attachmentsEl.files.length;i++) fd.append('attachments', attachmentsEl.files[i]);
+
+      fd.append('message', document.getElementById('message').value);
+      fd.append('mmsTitle', document.getElementById('mmsTitle').value || 'title');
+      fd.append('mmsType', document.getElementById('mmsType').value);
+      if (document.getElementById('appId').value) fd.append('appId', document.getElementById('appId').value);
+
+      try {
+        const r = await fetch('http://localhost:3000/api/send', { method:'POST', body: fd });
+        const j = await r.json();
+        document.getElementById('result').textContent = JSON.stringify(j, null, 2);
+      } catch (err) {
+        document.getElementById('result').textContent = 'Error: ' + err.message;
+      } finally {
+        sendBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
