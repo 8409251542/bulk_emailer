@@ -10,16 +10,23 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@everapi/numlookupapi-js": "^1.0.2",
+    "@supabase/supabase-js": "^2.77.0",
+    "axios": "^1.13.1",
+    "body-parser": "^2.2.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
-    "dotenv": "^17.2.2",
+    "csv-parser": "^3.2.0",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "express-session": "^1.18.2",
+    "fast-csv": "^5.0.5",
     "fs": "^0.0.1-security",
     "jszip": "^3.10.1",
     "multer": "^2.0.2",
     "node-fetch": "^3.3.2",
     "path": "^0.12.7",
+    "puppeteer": "^24.27.0",
     "xlsx": "^0.18.5"
   }
 }
